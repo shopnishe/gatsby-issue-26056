@@ -1,31 +1,27 @@
-// This API call creates the relationship from neighbourhoods to stores;
-// switching to the `sourceNodes` API doesn't seem to change anything, the bug
-// is still triggered
-exports.createSchemaCustomization = ({ actions, schema }) => {
+exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions
-  const { buildObjectType } = schema
 
-  createTypes([
-    buildObjectType({
-      name: "SanityNeighbourhood",
-      interfaces: ["Node"],
-      fields: {
-        stores: {
-          type: "[SanityStore]",
-          resolve: async ({ id }, args, { nodeModel }) =>
-            await nodeModel.runQuery({
-              query: {
-                // Commenting out the below line fixes the index page query (but
-                // also associates all stores to all neighbourhoods)
-                filter: { neighbourhoods: { elemMatch: { id: { eq: id } } } },
-              },
-              type: "SanityStore",
-              firstOnly: false,
-            }),
-        },
+  createTypes(`
+    type SanityNeighbourhood implements Node @infer {
+      stores: [SanityStore]
+    }
+  `)
+}
+
+exports.createResolvers = ({ createResolvers }) => {
+  createResolvers({
+    SanityNeighbourhood: {
+      stores: {
+        resolve: async ({ id }, args, { nodeModel }) =>
+          await nodeModel.runQuery({
+            type: "SanityStore",
+            query: {
+              filter: { neighbourhoods: { elemMatch: { id: { eq: id } } } },
+            },
+          }),
       },
-    }),
-  ])
+    },
+  })
 }
 
 // This API call triggers the bug when its page queries call the custom resolver
