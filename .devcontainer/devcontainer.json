@@ -1,9 +1,6 @@
 {
-  "name": "Gatsby issue 26056",
+  "name": "Nishe Gatsby issue reproductions",
   "dockerFile": "Dockerfile",
-  "settings": {
-    "terminal.integrated.shell.linux": "/bin/bash"
-  },
   "extensions": [
     "editorconfig.editorconfig",
     "dbaeumer.vscode-eslint",
