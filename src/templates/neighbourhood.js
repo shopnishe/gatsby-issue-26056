@@ -20,8 +20,8 @@ export default function Neighbourhood({ data: { sanityNeighbourhood } }) {
 }
 
 export const query = graphql`
-  query NeighbourhoodTemplate($slug: String!) {
-    sanityNeighbourhood(slug: { current: { eq: $slug } }) {
+  query NeighbourhoodTemplate($id: String!) {
+    sanityNeighbourhood(id: { eq: $id }) {
       stores {
         id
       }

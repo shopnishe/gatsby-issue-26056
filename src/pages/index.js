@@ -29,7 +29,7 @@ export const query = graphql`
     allSanityStore(
       filter: {
         neighbourhoods: {
-          elemMatch: { slug: { current: { eq: "harbourfront" } } }
+          elemMatch: { id: { eq: "-b6e13861-6377-5b1d-b503-527001cb0f96" } }
         }
       }
     ) {

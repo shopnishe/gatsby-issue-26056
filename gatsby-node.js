@@ -12,10 +12,11 @@ exports.createResolvers = ({ createResolvers }) => {
   createResolvers({
     SanityNeighbourhood: {
       stores: {
-        resolve: async ({ id }, args, { nodeModel }) =>
-          await nodeModel.runQuery({
+        resolve: ({ id }, args, { nodeModel }) =>
+          nodeModel.runQuery({
             type: "SanityStore",
             query: {
+              // Comment out this line to stop the bug (but lose filtering)
               filter: { neighbourhoods: { elemMatch: { id: { eq: id } } } },
             },
           }),
@@ -24,14 +25,17 @@ exports.createResolvers = ({ createResolvers }) => {
   })
 }
 
-// This API call triggers the bug when its page queries call the custom resolver
-exports.createPages = async ({ graphql, actions }) => {
+// Comment out this line to stop the bug (but lose templated pages)
+exports.createPages = createPages
+
+async function createPages({ graphql, actions }) {
   const { createPage } = actions
 
   const { data, errors } = await graphql(`
     query CreatePages {
       neighbourhoods: allSanityNeighbourhood {
         nodes {
+          id
           slug {
             current
           }
@@ -44,11 +48,11 @@ exports.createPages = async ({ graphql, actions }) => {
     throw errors
   }
 
-  data.neighbourhoods.nodes.forEach(({ slug: { current: slug } }) => {
+  data.neighbourhoods.nodes.forEach(({ id, slug: { current } }) => {
     createPage({
-      path: slug,
+      path: current,
       component: require.resolve(`./src/templates/neighbourhood.js`),
-      context: { slug },
+      context: { id },
     })
   })
 }
