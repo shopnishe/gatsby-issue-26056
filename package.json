@@ -1,7 +1,8 @@
 {
   "name": "gatsby-issues",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.0.0",
+  "author": "Aaron Adams <aaron.adams@nishe.ca>",
   "repository": {
     "type": "git",
     "url": "https://github.com/shopnishe/gatsby-issues.git"
@@ -13,16 +14,16 @@
     "serve": "gatsby serve"
   },
   "dependencies": {
-    "gatsby": "^2.24.53",
+    "gatsby": "^2.24.70",
     "gatsby-source-sanity": "^6.0.4",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
-    "eslint": "^7.8.1",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-react": "^7.20.6",
+    "eslint": "^7.10.0",
+    "eslint-config-prettier": "^6.12.0",
+    "eslint-plugin-react": "^7.21.3",
     "prettier": "2.0.5"
   }
 }
