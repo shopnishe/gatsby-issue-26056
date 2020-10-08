@@ -1,11 +1,12 @@
 {
   "name": "Nishe Gatsby issue reproductions",
-  "dockerFile": "Dockerfile",
+  "image": "mcr.microsoft.com/vscode/devcontainers/javascript-node:0-12-buster",
   "extensions": [
     "editorconfig.editorconfig",
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode"
   ],
   "forwardPorts": [8000],
+  "postCreateCommand": "npm install",
   "remoteUser": "node"
 }
