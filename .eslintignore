@@ -1,0 +1,8 @@
+# Gatsby cache directory and build directory
+.cache/
+public/
+
+# Log directories
+logs/
+
+# eslint already ignores `node_modules/` and dotfiles by default

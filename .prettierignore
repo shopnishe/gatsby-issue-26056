@@ -1,4 +1,15 @@
-.cache
-package.json
+# Gatsby cache directory and build directory
+.cache/
+public/
+
+# Log directories
+logs/
+
+# Dependency directories
+node_modules/
+
+# NPM cache directories
+.npm/
+
+# NPM lock files
 package-lock.json
-public
